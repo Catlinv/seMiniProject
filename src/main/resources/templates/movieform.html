@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+<div>
+    <form class="form-horizontal" th:object="${movie}" th:action="@{/movie}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Title:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{title}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Year:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{year}"/>
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

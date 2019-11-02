@@ -4,8 +4,6 @@ import com.example.demo.domain.Movie;
 import org.springframework.stereotype.Service;
 import com.example.demo.repositories.MovieRepository;
 
-import java.util.List;
-
 @Service
 public class MoviesServiceImpl implements MoviesService {
 
@@ -21,11 +19,6 @@ public class MoviesServiceImpl implements MoviesService {
         return movieRepository.findById(id).get();
     }
 
-    @Override
-    public List<Movie> findAllMovies() {
-
-        return movieRepository.findAll();
-    }
 
     @Override
     public Iterable<Movie> listAllMovies() {
@@ -37,13 +30,6 @@ public class MoviesServiceImpl implements MoviesService {
         return movieRepository.save(movie);
     }
 
-    @Override
-    public Movie editMovie(Movie movie) {
-        Movie toEdit = movieRepository.findById(movie.getId()).get();
-        toEdit.setYear(movie.getYear());
-        toEdit.setTitle(movie.getTitle());
-        return movieRepository.save(toEdit);
-    }
 
     @Override
     public void deleteMovie(Long id) {

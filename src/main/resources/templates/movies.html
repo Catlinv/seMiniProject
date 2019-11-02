@@ -14,7 +14,6 @@
                 <th>Movie Name</th>
                 <th>Movie Year</th>
 
-                <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -23,12 +22,15 @@
                 <td th:text="${movie.title}">Movie Name</td>
                 <td th:text="${movie.year}">Movie Year</td>
 
-                <td ><a th:href="${'/movie/show/' + movie.id}">View</a></td>
-                <td ><a th:href="${'/movie/edit/' + movie.id}">Edit</a></td>
-                <td ><a th:href="${'/movie/delete/' + movie.id}">Delete</a></td>
+                <td><a th:href="${'/movie/edit/' + movie.id}">Edit</a></td>
+                <td><a th:href="${'/movie/delete/' + movie.id}">Delete</a></td>
             </tr>
         </table>
-
+    </div>
+    <div>
+        <a th:href="${'/movie/new'}">
+            <button>Add new movie</button>
+        </a>
     </div>
 </div>
 </body>

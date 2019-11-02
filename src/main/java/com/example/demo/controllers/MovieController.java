@@ -4,22 +4,14 @@ import com.example.demo.domain.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.services.MoviesService;
 
-import java.util.List;
-
-
-//@RequestMapping(MovieController.BASE_URL)
 @Controller
 public class MovieController {
     private MoviesService moviesService;
-    //public static final String BASE_URL = "/api/movies";
 
     public MovieController(MoviesService moviesService) {
         this.moviesService = moviesService;
@@ -36,25 +28,28 @@ public class MovieController {
         return "movies";
     }
 
-    @GetMapping("/movie/{id}")
-    Movie getMovieById(@PathVariable Long id){
-        return moviesService.findMovieById(id);
+    @RequestMapping(value = "movie", method = RequestMethod.POST)
+    public String saveProduct(Movie movie) {
+        moviesService.saveMovie(movie);
+        return "redirect:/movies";
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    Movie addMovie(@RequestBody Movie movie){
-        return  moviesService.saveMovie(movie);
+    @RequestMapping("movie/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("movie", moviesService.findMovieById(id));
+        return "movieform";
     }
 
-    @PutMapping
-    Movie editMovie(@RequestBody Movie movie){
-        return moviesService.editMovie(movie);
+    @RequestMapping("movie/new")
+    public String newProduct(Model model) {
+        model.addAttribute("movie", new Movie());
+        return "movieform";
     }
 
-    @DeleteMapping("/movie/{id}")
-    void deleteMovie(@PathVariable Long id){
-         moviesService.deleteMovie(id);
+    @RequestMapping("/movie/delete/{id}")
+    public String deleteMovie(@PathVariable Long id) {
+        moviesService.deleteMovie(id);
+        return "redirect:/movies";
     }
 
 }
