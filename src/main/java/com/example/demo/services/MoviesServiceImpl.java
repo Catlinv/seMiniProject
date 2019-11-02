@@ -17,12 +17,31 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public Movie findMovieById(Long id) {
-        return movieRepository.getOne(id);
+
+        return movieRepository.findById(id).get();
     }
 
     @Override
     public List<Movie> findAllMovies() {
 
         return movieRepository.findAll();
+    }
+
+    @Override
+    public Movie saveMovie(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
+    @Override
+    public Movie editMovie(Movie movie) {
+        Movie toEdit = movieRepository.findById(movie.getId()).get();
+        toEdit.setYear(movie.getYear());
+        toEdit.setTitle(movie.getTitle());
+        return movieRepository.save(toEdit);
+    }
+
+    @Override
+    public void deleteMovie(Long id) {
+         movieRepository.delete(movieRepository.findById(id).get());
     }
 }

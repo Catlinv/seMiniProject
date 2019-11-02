@@ -11,4 +11,11 @@ public interface MoviesService {
     Movie findMovieById(Long id);
 
     List<Movie> findAllMovies();
+
+    Movie saveMovie(Movie movie);
+
+
+    Movie editMovie(Movie movie);
+
+    void deleteMovie(Long id);
 }
