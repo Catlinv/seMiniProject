@@ -25,4 +25,9 @@ public class MoviesServiceImpl implements MoviesService {
 
         return movieRepository.findAll();
     }
+
+    @Override
+    public Iterable<Movie> listAllMovies() {
+        return movieRepository.findAll();
+    }
 }
