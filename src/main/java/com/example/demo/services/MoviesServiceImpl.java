@@ -28,6 +28,11 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
+    public Iterable<Movie> listAllMovies() {
+        return movieRepository.findAll();
+    }
+
+    @Override
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }
