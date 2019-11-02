@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.repositories.MovieRepository;
 
 import java.util.List;
+
 @Service
 public class MoviesServiceImpl implements MoviesService {
 

@@ -15,7 +15,7 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Loading Movie asdasadasdasdaData");
+        System.out.println("Loading Movie Data");
 
         Movie c1 = new Movie();
         c1.setTitle("Star Wars");
@@ -32,11 +32,9 @@ public class BootStrapData implements CommandLineRunner {
         c3.setYear(2017);
         movieRepository.save(c3);
 
-        System.out.println("Movies Added: "+movieRepository.count());
+        System.out.println("Movies Added: " + movieRepository.count());
 
     }
-
-
 
 
 }

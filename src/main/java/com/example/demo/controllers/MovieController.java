@@ -12,14 +12,14 @@ import java.util.List;
 @RequestMapping(MovieController.BASE_URL)
 public class MovieController {
     private final MoviesService moviesService;
-    public static final String BASE_URL = "/api/v1/movies";
+    public static final String BASE_URL = "/api/movies";
 
     public MovieController(MoviesService moviesService) {
         this.moviesService = moviesService;
     }
 
     @GetMapping
-    List<Movie> getAllMovies(){
+    List<Movie> getAllMovies() {
         return moviesService.findAllMovies();
     }
 
