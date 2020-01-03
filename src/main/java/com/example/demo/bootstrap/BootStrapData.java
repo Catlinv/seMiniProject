@@ -1,38 +1,43 @@
 package com.example.demo.bootstrap;
 
-import com.example.demo.domain.Movie;
+import com.example.demo.controllers.Bitstream;
+import com.example.demo.domain.Bank;
+import com.example.demo.repositories.BankRepository;
 import org.springframework.boot.CommandLineRunner;
-import com.example.demo.repositories.MovieRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
-    private final MovieRepository movieRepository;
+    private final BankRepository bankRepository;
 
-    public BootStrapData(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public BootStrapData(BankRepository bankRepository) {
+        this.bankRepository = bankRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Loading Movie Data");
 
-        Movie c1 = new Movie();
-        c1.setTitle("Star Wars");
-        c1.setYear(1984);
-        movieRepository.save(c1);
+        Bank c1 = new Bank();
+        c1.setClientID(1L);
+        c1.setClientKey(new Bitstream("Client1"));
+        c1.setSum(123.11f);
+        bankRepository.save(c1);
 
-        Movie c2 = new Movie();
-        c2.setTitle("Real Steel");
-        c2.setYear(2013);
-        movieRepository.save(c2);
+        Bank c2 = new Bank();
+        c2.setClientID(2L);
+        c2.setClientKey(new Bitstream("Client2"));
+        c2.setSum(1230.11f);
+        bankRepository.save(c2);
 
-        Movie c3 = new Movie();
-        c3.setTitle("Enders Game");
-        c3.setYear(2017);
-        movieRepository.save(c3);
+        Bank c3 = new Bank();
+        c3.setClientID(3L);
+        c3.setClientKey(new Bitstream("Client3"));
+        c3.setSum(12300.11f);
+        bankRepository.save(c3);
 
-        System.out.println("Movies Added: " + movieRepository.count());
+
+        System.out.println("Accounts Added: " + bankRepository.count());
 
     }
 
