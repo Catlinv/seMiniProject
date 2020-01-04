@@ -23,13 +23,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public Bank findBankByClientId(Long id) {
-        Bank newB = new Bank();
-        newB.setId(null);
-        newB.setClientID(id);
-        newB.setClientKey(null);
-        newB.setSum(0.0f);
-        Example<Bank> example = Example.of(newB);
-        return bankRepository.findOne(example).get();
+        return bankRepository.findBankByClientID(id);
     }
 
 

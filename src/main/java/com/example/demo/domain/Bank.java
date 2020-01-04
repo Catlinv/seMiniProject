@@ -17,7 +17,7 @@ public class Bank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long clientID;
-    private Bitstream clientKey;
+    private String clientKey;
     private float sum;
 
     public Long getId() {
@@ -36,11 +36,11 @@ public class Bank {
         this.clientID = clientID;
     }
 
-    public Bitstream getClientKey() {
+    public String getClientKey() {
         return clientKey;
     }
 
-    public void setClientKey(Bitstream clientKey) {
+    public void setClientKey(String clientKey) {
         this.clientKey = clientKey;
     }
 

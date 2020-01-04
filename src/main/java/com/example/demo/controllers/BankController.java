@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Movie;
+import com.example.demo.domain.Bank;
+import com.example.demo.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,45 +12,35 @@ import com.example.demo.services.MoviesService;
 
 @Controller
 public class BankController {
-    private MoviesService moviesService;
+    private BankService bankService;
+    static final Bitstream bankKey = new Bitstream("Bank");
+    static final Bitstream storeKey = new Bitstream("Store");
 
-    public BankController(MoviesService moviesService) {
-        this.moviesService = moviesService;
+    public BankController(BankService bankService) {
+        this.bankService = bankService;
     }
 
     @Autowired
-    public void setMovieService(MoviesService moviesService) {
-        this.moviesService = moviesService;
+    public void setMovieService(BankService bankService) {
+        this.bankService = bankService;
     }
 
-    @RequestMapping(value = "movies", method = RequestMethod.GET)
-    public String list(Model model) {
-        model.addAttribute("movies", moviesService.listAllMovies());
-        return "movies";
-    }
 
-    @RequestMapping(value = "movie", method = RequestMethod.POST)
-    public String saveProduct(Movie movie) {
-        moviesService.saveMovie(movie);
-        return "redirect:/movies";
-    }
-
-    @RequestMapping("movie/edit/{id}")
-    public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("movie", moviesService.findMovieById(id));
-        return "movieform";
-    }
-
-    @RequestMapping("movie/new")
-    public String newProduct(Model model) {
-        model.addAttribute("movie", new Movie());
-        return "movieform";
-    }
-
-    @RequestMapping("/movie/delete/{id}")
-    public String deleteMovie(@PathVariable Long id) {
-        moviesService.deleteMovie(id);
-        return "redirect:/movies";
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String purchase(@RequestParam("clientId") Long clientId, @RequestParam("storeKey") String sKey, @RequestParam("clientKey") String cKey,
+                           @RequestParam("sum") float sum) {
+        System.out.println(clientId);
+        System.out.println(sKey);
+        System.out.println(cKey);
+        System.out.println(sum);
+        Bank client = bankService.findBankByClientId(clientId);
+        if (client == null) return "redirect:http://ecommerce/nullC";
+        Bitstream store = new Bitstream(sKey);
+        Bitstream clientK = new Bitstream(cKey);
+        if (Bitstream.decrypt(clientK, store, BankController.bankKey, "Success").equals(Bitstream.decrypt(new Bitstream(client.getClientKey()), BankController.storeKey, BankController.bankKey, "Success")))
+            if (bankService.completePurchase(clientId, sum)) return "redirect:http://ecommerce/succ";
+            else return "redirect:http://ecommerce/noFunds";
+        return "redirect:http://ecommerce/wrongKey";
     }
 
 }

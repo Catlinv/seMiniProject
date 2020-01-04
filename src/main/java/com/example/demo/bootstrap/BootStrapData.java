@@ -20,19 +20,19 @@ public class BootStrapData implements CommandLineRunner {
 
         Bank c1 = new Bank();
         c1.setClientID(1L);
-        c1.setClientKey(new Bitstream("Client1"));
+        c1.setClientKey("Client1");
         c1.setSum(123.11f);
         bankRepository.save(c1);
 
         Bank c2 = new Bank();
         c2.setClientID(2L);
-        c2.setClientKey(new Bitstream("Client2"));
+        c2.setClientKey("Client2");
         c2.setSum(1230.11f);
         bankRepository.save(c2);
 
         Bank c3 = new Bank();
         c3.setClientID(3L);
-        c3.setClientKey(new Bitstream("Client3"));
+        c3.setClientKey("Client3");
         c3.setSum(12300.11f);
         bankRepository.save(c3);
 
